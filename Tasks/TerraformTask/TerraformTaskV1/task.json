@@ -116,6 +116,14 @@
             "helpMarkDown": "Select a Google Cloud Platform connection for the deployment.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup a Google Cloud Platform service connection using the 'Add' or 'Manage' button."
         },
         {
+            "name": "environmentServiceNameOCI",
+            "type": "connectedService:OCIServiceEndpoint",
+            "label": "Oracle Cloud Infrastructure (OCI) connection",
+            "required": true,
+            "visibleRule": "provider = gcp && command != init && command != validate",
+            "helpMarkDown": "Select a Oracle Cloud Infrastructure connection for the deployment.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup a Oracle Cloud Infrastructure service connection using the 'Add' or 'Manage' button."
+        },
+        {
             "name": "backendServiceArm",
             "type": "connectedService:AzureRM",
             "label": "Azure subscription",
@@ -217,6 +225,25 @@
             "required": false,
             "helpMarkDown": "The relative path to the state file inside the GCP bucket. For example, if you give the input as 'terraform', then the state file, named default.tfstate, will be stored inside an object called terraform.",
             "groupName": "backendGCP"
+        },
+        {
+            "name": "backendServiceOCI",
+            "type": "connectedService:OCIServiceEndpoint",
+            "label": "Oracle Cloud Infrastructure (OCI) connection",
+            "required": true,
+            "helpMarkDown": "Oracle Cloud Infrastructure (OCI) connection for the terraform backend configuration.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup an OCI service connection using the 'Add' or 'Manage' button.",
+            "groupName": "backendOCI"
+        },
+        {
+            "name": "backendOCIPAT",
+            "type": "pickList",
+            "label": "Bucket",
+            "required": true,
+            "helpMarkDown": "The name of the OCI Object Storage bucket using a preauthenticated token (PAT) for storing the Terraform remote state file.<br><br>To set up an OCI service connection, click on the 'Help(i)' button of the above input named 'OCI Services connection'",
+            "groupName": "backendOCI",
+            "properties": {
+                "EditableOptions": "True"
+            }
         }
     ],
     "dataSourceBindings": [
