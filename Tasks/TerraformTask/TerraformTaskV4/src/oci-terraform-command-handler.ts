@@ -30,7 +30,7 @@ export class TerraformCommandHandlerOCI extends BaseTerraformCommandHandler {
     public async handleProvider(command: TerraformAuthorizationCommandInitializer) : Promise<void> {
         if (command.serviceProvidername) {
             /*
-             OCI_CLI_USER
+            OCI_CLI_USER
             OCI_CLI_TENANCY
             OCI_CLI_FINGERPRINT
             OCI_CLI_KEY_CONTENT

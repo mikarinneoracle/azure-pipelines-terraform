@@ -2,14 +2,14 @@
     "manifestVersion": 1,
     "id": "custom-terraform-tasks",
     "name": "Terraform",
-    "version": "0.1.13",
+    "version": "0.1.14",
     "publisher": "ms-devlabs",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
-    "description": "Install terraform and run terraform commands to manage resources on Azure, AWS and GCP.",
+    "description": "Install terraform and run terraform commands to manage resources on Azure, AWS, GCP and OCI.",
     "public": true,
     "categories": [
         "Azure Pipelines"
@@ -19,6 +19,7 @@
         "Azure",
         "AWS",
         "GCP",
+        "OCI",
         "Release", 
         "DevOps"
     ],
@@ -36,6 +37,9 @@
         },
         {
             "path": "images/2_GCP_service_endpoint.PNG"
+        },
+        {
+            "path": "images/8_OCI_service_endpoint.PNG"
         },
         {
             "path": "images/3_Terraform_tool_installer_search.PNG"
@@ -74,6 +78,10 @@
             "addressable": true
         },
         {
+            "path": "images/8_OCI_service_endpoint.PNG",
+            "addressable": true
+        },
+        {
             "path": "images/3_Terraform_tool_installer_search.PNG",
             "addressable": true
         },
@@ -96,7 +104,7 @@
     ],
     "repository": {
         "type": "git",
-        "uri": "https://github.com/microsoft/azure-pipelines-terraform/tree/main"
+        "uri": "https://github.com/mikarinneoracle/azure-pipelines-terraform/tree/main"
     },
     "contributions": [
         {
@@ -225,7 +233,7 @@
                 ],
                 "authenticationSchemes": [
                     {
-                        "type": "ms.vss-endpoint.endpoint-auth-scheme-JWT",
+                        "type": "ms.vss-endpoint.endpoint-auth-scheme-none",
                         "inputDescriptors": [
                             {
                                 "id": "Issuer",
@@ -261,6 +269,103 @@
                         "description": "The project id of the GCP project in which your resources will be managed",
                         "inputMode": "textbox",
                         "isConfidential": false,
+                        "validation": {
+                            "isRequired": true,
+                            "dataType": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": "oci-service-endpoint",
+            "description": "Credentials for task invoking OCI services",
+            "type": "ms.vss-endpoint.service-endpoint-type",
+            "targets": [
+                "ms.vss-endpoint.endpoint-types"
+            ],
+            "properties": {
+                "name": "OCIServiceEndpoint",
+                "displayName": "OCI for Terraform",
+                "url": {
+                    "displayName": "Server Url",
+                    "helpText": "OCI homepage",
+                    "value": "https://cloud.oracle.com/",
+                    "isVisible": "false"
+                },
+                "dataSources": [
+                    {
+                        "name": "OCI",
+                        "endpointUrl": "{{endpoint.url}}",
+                        "RequestVerb":"GET",
+                        "resultSelector": ""
+                    }                
+                ],
+                "authenticationSchemes": [
+                    {
+                        "id": "endpoint-auth-scheme-none",
+                        "description": "OCI endpoint authentication scheme with no authentication.",
+                        "type": "ms.vss-endpoint.endpoint-auth-scheme-none",
+                        "targets": [
+                            "ms.vss-endpoint.endpoint-auth-schemes"
+                        ],
+                        "properties": {
+                            "name": "None",
+                            "displayName": "OCI No authentication for PAR"
+                        }
+                    }
+                ],
+                "inputDescriptors": [
+                    {
+                        "id": "user",
+                        "name": "User OCID",
+                        "description": "OCI user OCID",
+                        "inputMode": "textbox",
+                        "isConfidential": false,
+                        "validation": {
+                            "isRequired": true,
+                            "dataType": "string"
+                        }
+                    },
+                    {
+                        "id": "tenancy",
+                        "name": "Tenancy OCID",
+                        "description": "OCI tenancy OCID",
+                        "inputMode": "passwordbox",
+                        "isConfidential": true,
+                        "validation": {
+                            "isRequired": true,
+                            "dataType": "string"
+                        }
+                    },
+                    {
+                        "id": "region",
+                        "name": "Region",
+                        "description": "OCI region",
+                        "inputMode": "textbox",
+                        "isConfidential": false,
+                        "validation": {
+                            "isRequired": true,
+                            "dataType": "string"
+                        }
+                    },
+                    {
+                        "id": "fingerprint",
+                        "name": "Key fingerprint",
+                        "description": "The OCI access key fingerprint",
+                        "inputMode": "textbox",
+                        "isConfidential": false,
+                        "validation": {
+                            "isRequired": true,
+                            "dataType": "string"
+                        }
+                    },
+                    {
+                        "id": "key",
+                        "name": "Secret access key",
+                        "description": "The OCI secret access key",
+                        "inputMode": "passwordbox",
+                        "isConfidential": true,
                         "validation": {
                             "isRequired": true,
                             "dataType": "string"
