@@ -1,0 +1,23 @@
+{
+ "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+ "id": "44322d36-e4a9-4817-a025-780b88a225ad",
+ "name": "ociterraform",
+ "friendlyName": "ociterraform",
+ "description": "Terraform task for Azure DevOps",
+ "helpMarkDown": "",
+ "category": "Utility",
+ "author": "mikarinneoracle",
+ "version": {
+     "Major": 0,
+     "Minor": 1,
+     "Patch": 0
+ },
+ "instanceNameFormat": "",
+ "inputs": [
+ ],
+ "execution": {
+     "Node": {
+         "target": "index.ts"
+     }
+ }
+ }
