@@ -2,8 +2,8 @@
     "manifestVersion": 1,
     "id": "custom-terraform-tasks",
     "name": "Terraform",
-    "version": "0.1.14",
-    "publisher": "ms-devlabs",
+    "version": "0.1.15",
+    "publisher": "mikarinneoracle",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
