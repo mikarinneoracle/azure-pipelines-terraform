@@ -39,9 +39,6 @@
             "path": "images/2_GCP_service_endpoint.PNG"
         },
         {
-            "path": "images/8_OCI_service_endpoint.PNG"
-        },
-        {
             "path": "images/3_Terraform_tool_installer_search.PNG"
         },
         {
@@ -75,10 +72,6 @@
         },
         {
             "path": "images/2_GCP_service_endpoint.PNG",
-            "addressable": true
-        },
-        {
-            "path": "images/8_OCI_service_endpoint.PNG",
             "addressable": true
         },
         {
