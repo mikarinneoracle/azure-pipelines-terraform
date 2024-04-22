@@ -12,8 +12,8 @@
     ],
     "demands": [],
     "version": {
-        "Major": "0",
-        "Minor": "202",
+        "Major": "1",
+        "Minor": "216",
         "Patch": "0"
     },
     "instanceNameFormat": "Install Terraform $(terraformVersion)",
