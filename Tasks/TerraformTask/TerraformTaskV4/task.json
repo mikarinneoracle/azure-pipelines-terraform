@@ -1,5 +1,5 @@
 {
-    "id": "b473a1cd-6a9a-47c6-9a61-eed5bac0fd4b",
+    "id": "9655a175-b226-4cd3-940f-844f7cc17c26",
     "name": "TerraformTaskV4",
     "friendlyName": "Terraform",
     "description": "Execute terraform commands to manage resources on AzureRM, Amazon Web Services(AWS) and Google Cloud Platform(GCP)",

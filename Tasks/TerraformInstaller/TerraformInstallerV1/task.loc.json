@@ -1,53 +1,53 @@
 {
-  "id": "a4789e5d-f6e8-431f-add9-379d640a883c",
+  "id": "c15aca86-f0c1-4c70-9cd6-1e4075d3bcdf",
   "name": "TerraformInstaller",
-  "friendlyName": "ms-resource:loc.friendlyName",
-  "description": "ms-resource:loc.description",
+  "friendlyName": "Terraform tool installer",
+  "description": "Find in cache or download a specific version of Terraform and prepend it to the PATH",
   "author": "Microsoft Corporation",
-  "helpMarkDown": "ms-resource:loc.helpMarkDown",
+  "helpMarkDown": "[Learn more about this task](https://aka.ms/AAf1a0p)",
   "category": "Tool",
   "visibility": [
-    "Build",
-    "Release"
+      "Build",
+      "Release"
   ],
   "demands": [],
   "version": {
-    "Major": "1",
-    "Minor": "216",
-    "Patch": "0"
+      "Major": "1",
+      "Minor": "216",
+      "Patch": "0"
   },
-  "instanceNameFormat": "ms-resource:loc.instanceNameFormat",
+  "instanceNameFormat": "Install Terraform $(terraformVersion)",
   "inputs": [
-    {
-      "name": "terraformVersion",
-      "type": "string",
-      "label": "ms-resource:loc.input.label.terraformVersion",
-      "defaultValue": "latest",
-      "required": true,
-      "helpMarkDown": "ms-resource:loc.input.help.terraformVersion"
-    }
+      {
+          "name": "terraformVersion",
+          "type": "string",
+          "label": "Version",
+          "defaultValue": "latest",
+          "required": true,
+          "helpMarkDown": "The version of Terraform which should be installed on the agent if not already present"
+      }
   ],
   "execution": {
-    "Node10": {
-      "target": "src/index.js"
-    },"Node16": {
-      "target": "src/index.js"
-    }
+      "Node10": {
+          "target": "src/index.js"
+      },"Node16": {
+          "target": "src/index.js"
+      }
   },
   "outputVariables": [
-    {
-      "name": "terraformLocation",
-      "description": "The location of the terraform binary that was installed on the agent."
-    }
+      {
+          "name": "terraformLocation",
+          "description": "The location of the terraform binary that was installed on the agent."
+      }
   ],
   "messages": {
-    "VerifyTerraformInstallation": "ms-resource:loc.messages.VerifyTerraformInstallation",
-    "InputVersionNotValidSemanticVersion": "ms-resource:loc.messages.InputVersionNotValidSemanticVersion",
-    "TerraformNotFoundInFolder": "ms-resource:loc.messages.TerraformNotFoundInFolder",
-    "OperatingSystemNotSupported": "ms-resource:loc.messages.OperatingSystemNotSupported",
-    "ArchitectureNotSupported": "ms-resource:loc.messages.ArchitectureNotSupported",
-    "TerraformDownloadFailed": "ms-resource:loc.messages.TerraformDownloadFailed",
-    "TerraformVersionNotFound": "ms-resource:loc.messages.TerraformVersionNotFound",
-    "GettingLatestTerraformVersion": "ms-resource:loc.messages.GettingLatestTerraformVersion"
+      "VerifyTerraformInstallation": "Verifying Terraform installation...",
+      "InputVersionNotValidSemanticVersion": "Input version %s is not a valid semantic version",
+      "TerraformNotFoundInFolder": "Terraform executable not found in path %s",
+      "OperatingSystemNotSupported": "Operating system %s is not supported",
+      "ArchitectureNotSupported": "Architecture %s is not supported",
+      "TerraformDownloadFailed": "Failed to download Terraform from url %s. Error %s",
+      "TerraformVersionNotFound": "Unable to get latest version: %s defaulting to 1.0.8",
+      "GettingLatestTerraformVersion": "Getting latest Terraform version."
   }
 }
