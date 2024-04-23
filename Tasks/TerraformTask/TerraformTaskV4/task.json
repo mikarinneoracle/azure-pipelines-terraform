@@ -148,6 +148,7 @@
             "type": "string",
             "label": "PAT",
             "required": true,
+            "visibleRule": "provider = oci",
             "helpMarkDown": "OCI Object Storage PAT URL for TF statefile",
             "groupName": "backendOCI",
             "properties": {
@@ -156,11 +157,6 @@
         }
     ],
     "dataSourceBindings": [
-        {
-            "target": "backendOCIPAT",
-            "endpointId": "$(backendServiceOCI)",
-            "dataSourceName": "OCI"
-        }
     ],
     "outputVariables": [
         {
