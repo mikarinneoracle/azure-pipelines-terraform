@@ -129,7 +129,7 @@
         },
         {
             "name": "environmentServiceNameOCI",
-            "type": "connectedService:OCIServiceEndpoint",
+            "type": "connectedService:ServiceEndpointOCI",
             "label": "OCI connection",
             "required": true,
             "visibleRule": "provider = oci && command != init && command != validate",
@@ -137,7 +137,7 @@
         },
         {
             "name": "backendServiceOCI",
-            "type": "connectedService:OCIServiceEndpoint",
+            "type": "connectedService:ServiceEndpointOCI",
             "label": "OCI Services connection",
             "required": true,
             "helpMarkDown": "OCI Services connection for the terraform backend configuration.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup an OCI Services service connection using the 'Add' or 'Manage' button.",
