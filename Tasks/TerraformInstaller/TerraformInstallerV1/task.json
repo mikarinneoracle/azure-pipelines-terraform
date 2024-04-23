@@ -1,5 +1,5 @@
 {
-    "id": "9e43a9ed-45a7-4c74-ba36-759d9483171e",
+    "id": "472a1ab5-8e40-4087-8691-69a717b1da7d",
     "name": "TerraformInstaller",
     "friendlyName": "Terraform tool installer",
     "description": "Find in cache or download a specific version of Terraform and prepend it to the PATH",
