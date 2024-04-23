@@ -1,8 +1,8 @@
 {
     "manifestVersion": 1,
-    "id": "custom-terraform-tasks",
+    "id": "custom-terraform-tasks-oci",
     "name": "Terraform",
-    "version": "0.1.31",
+    "version": "0.1.0",
     "publisher": "mikarinneoracle",
     "targets": [
         {
