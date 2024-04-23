@@ -13,8 +13,8 @@
     "showEnvironmentVariables": true,
     "demands": [],
     "version": {
-        "Major": "6",
-        "Minor": "0",
+        "Major": "5",
+        "Minor": "1",
         "Patch": "0"
     },
     "instanceNameFormat": "Terraform : $(provider)",
