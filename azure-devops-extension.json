@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "custom-terraform-tasks-oci-2",
     "name": "Terraform",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "publisher": "mikarinneoracle",
     "targets": [
         {
@@ -65,6 +65,9 @@
         },
         {
             "path": "Tasks/TerraformInstaller"
+        },
+        {
+            "path": "buildandreleasetask/src"
         },
         {
             "path": "images/1_AWS_service_endpoint.PNG",
