@@ -1,8 +1,8 @@
 {
     "manifestVersion": 1,
-    "id": "custom-terraform-tasks-oci-2",
+    "id": "custom-terraform-tasks-oci-3",
     "name": "Terraform",
-    "version": "0.1.4",
+    "version": "0.1.0",
     "publisher": "mikarinneoracle",
     "targets": [
         {
@@ -128,7 +128,7 @@
                 "ms.vss-endpoint.endpoint-types"
             ],
             "properties": {
-                "name": "ServiceEndpointOCI2",
+                "name": "ServiceEndpointOCI3",
                 "displayName": "OCI for Terraform",
                 "url": {
                     "displayName": "Server Url",
