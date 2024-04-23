@@ -1,182 +1,182 @@
 {
-  "id": "3f68cb8a-d9ea-443a-b9bb-17d3c7e08305",
-  "name": "TerraformTaskV4",
-  "friendlyName": "Terraform",
-  "description": "Execute terraform commands to manage resources on AzureRM, Amazon Web Services(AWS) and Google Cloud Platform(GCP)",
-  "author": "Microsoft Corporation",
-  "helpMarkDown": "[Learn more about this task](https://aka.ms/AAf0uqr)",
-  "category": "Deploy",
-  "visibility": [
-      "Build",
-      "Release"
-  ],
-  "showEnvironmentVariables": true,
-  "demands": [],
-  "version": {
-      "Major": "4",
-      "Minor": "228",
-      "Patch": "0"
-  },
-  "instanceNameFormat": "Terraform : $(provider)",
-  "execution": {
-      "Node10": {
-          "target": "src/index.js"
-      },
-      "Node16": {
-          "target": "src/index.js"
-      }
-  },
-  "groups": [
-      {
-          "name": "backendOCI",
-          "displayName": "Oracle Cloud Infrastructure (OCI) backend configuration",
-          "isExpanded": true,
-          "visibleRule": "provider = oci && command = init"
-      }
-  ],
-  "inputs": [
-      {
-          "name": "provider",
-          "type": "picklist",
-          "label": "Provider",
-          "defaultValue": "oci",
-          "required": true,
-          "helpMarkDown": "The name of the provider used in the terraform configuration files.<br>Only one provider must be specified in the terraform configuration files in the below specified configuration directory.",
-          "options": {
-              "oci": "oci"
-          },
-          "properties": {
-              "EditableOptions": "False"
-          }
-      },
-      {
-          "name": "command",
-          "type": "pickList",
-          "label": "Command",
-          "defaultValue": "init",
-          "required": true,
-          "helpMarkDown": "The terraform command to execute.",
-          "options": {
-              "init": "init",
-              "validate": "validate",
-              "plan": "plan",
-              "show": "show",
-              "apply": "apply",
-              "output": "output",
-              "destroy": "destroy",
-              "custom": "custom"
-          },
-          "properties": {
-              "EditableOptions": "False"
-          }
-      },
-      {
-          "name": "workingDirectory",
-          "type": "filePath",
-          "label": "Configuration directory",
-          "defaultValue": "$(System.DefaultWorkingDirectory)",
-          "helpMarkDown": "Directory containing the Terraform configuration files. The default value is $(System.DefaultWorkingDirectory)",
-          "required": false
-      },
-      {
-          "name": "commandOptions",
-          "type": "string",
-          "label": "Additional command arguments",
-          "helpMarkDown": "Any additional arguments for the selected command such as '-option=value' or '-flag'. Multiple options can also be provided delimited by spaces.<br><br>Examples:<br>-out=tfplan (for terraform plan)<br>tfplan -auto-approve (for terraform apply)",
-          "required": false
-      },
-      {
-          "name": "outputTo",
-          "type": "pickList",
-          "label": "Output to",
-          "defaultValue": "console",
-          "visibleRule": "command = show || command = custom",
-          "helpMarkDown": "choose output to file or console. ",
-          "options": {
-              "file": "file",
-              "console": "console"
-          },
-          "required": true
-      },
-      {
-          "name": "customCommand",
-          "type": "string",
-          "label": "Custom command",
-          "visibleRule": "command = custom",
-          "helpMarkDown": "The custom terraform command to execute.",
-          "required": true
-      },
-      {
-          "name": "outputFormat",
-          "type": "pickList",
-          "label": "Output format",
-          "defaultValue": "default",
-          "visibleRule": "command = show",
-          "helpMarkDown": "choose format of ouput for show cmd. ",
-          "options": {
-              "json": "json",
-              "default": "default"
-          },
-          "required": true
-      },
-      {
-          "name": "fileName",
-          "type": "string",
-          "label": "Output Filename",
-          "visibleRule": "outputTo = file",
-          "required": true,
-          "helpMarkDown": "filename of output"
-      },
-      {
-          "name": "environmentServiceNameOCI",
-          "type": "connectedService:OCIServiceEndpoint",
-          "label": "OCI connection",
-          "required": true,
-          "visibleRule": "provider = oci && command != init && command != validate",
-          "helpMarkDown": "Select a OCI connection for the deployment.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup a OCI service connection using the 'Add' or 'Manage' button."
-      },
-      {
-          "name": "backendServiceOCI",
-          "type": "connectedService:OCIServiceEndpoint",
-          "label": "OCI Services connection",
-          "required": true,
-          "helpMarkDown": "OCI Services connection for the terraform backend configuration.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup an OCI Services service connection using the 'Add' or 'Manage' button.",
-          "groupName": "backendOCI"
-      },
-      {
-          "name": "backendOCIPAT",
-          "type": "pickList",
-          "label": "PAT",
-          "required": true,
-          "helpMarkDown": "OCI Object Storage PAT URL for TF statefile",
-          "groupName": "backendOCI",
-          "properties": {
-              "EditableOptions": "True"
-          }
-      }
-  ],
-  "dataSourceBindings": [
-      {
-          "target": "backendOCIPAT",
-          "endpointId": "$(backendServiceOCI)",
-          "dataSourceName": "OCI"
-      }
-  ],
-  "outputVariables": [
-      {
-          "name": "jsonPlanFilePath",
-          "description": "The location of the terraform plan file in JSON format that was created. This file can be used by tasks which are written for tools such as [Open Policy Agent](https://www.openpolicyagent.org/docs/latest/terraform/)<br><br>Note: This variable will only be set if 'command' input is set to 'plan'."
-      },
-      {
-          "name": "jsonOutputVariablesPath",
-          "description": "The location of the JSON file which contains the output variables set by the user in the terraform config files.<br><br>Note: This variable will only be set if 'command' input is set to 'output'."
-      },
-      {
-          "name": "changesPresent",
-          "description": "A boolean indicating if the terraform plan found any changes to apply."
-      }
-  ],
-  "messages": {
-      "TerraformToolNotFound": "Failed to find terraform tool in paths"
-  }
+    "id": "3f68cb8a-d9ea-443a-b9bb-17d3c7e08305",
+    "name": "TerraformTaskV4",
+    "friendlyName": "Terraform",
+    "description": "Execute terraform commands to manage resources on AzureRM, Amazon Web Services(AWS) and Google Cloud Platform(GCP)",
+    "author": "Microsoft Corporation",
+    "helpMarkDown": "[Learn more about this task](https://aka.ms/AAf0uqr)",
+    "category": "Deploy",
+    "visibility": [
+        "Build",
+        "Release"
+    ],
+    "showEnvironmentVariables": true,
+    "demands": [],
+    "version": {
+        "Major": "5",
+        "Minor": "1",
+        "Patch": "0"
+    },
+    "instanceNameFormat": "Terraform : $(provider)",
+    "execution": {
+        "Node10": {
+            "target": "src/index.js"
+        },
+        "Node16": {
+            "target": "src/index.js"
+        }
+    },
+    "groups": [
+        {
+            "name": "backendOCI",
+            "displayName": "Oracle Cloud Infrastructure (OCI) backend configuration",
+            "isExpanded": true,
+            "visibleRule": "provider = oci && command = init"
+        }
+    ],
+    "inputs": [
+        {
+            "name": "provider",
+            "type": "picklist",
+            "label": "Provider",
+            "defaultValue": "oci",
+            "required": true,
+            "helpMarkDown": "The name of the provider used in the terraform configuration files.<br>Only one provider must be specified in the terraform configuration files in the below specified configuration directory.",
+            "options": {
+                "oci": "oci"
+            },
+            "properties": {
+                "EditableOptions": "False"
+            }
+        },
+        {
+            "name": "command",
+            "type": "pickList",
+            "label": "Command",
+            "defaultValue": "init",
+            "required": true,
+            "helpMarkDown": "The terraform command to execute.",
+            "options": {
+                "init": "init",
+                "validate": "validate",
+                "plan": "plan",
+                "show": "show",
+                "apply": "apply",
+                "output": "output",
+                "destroy": "destroy",
+                "custom": "custom"
+            },
+            "properties": {
+                "EditableOptions": "False"
+            }
+        },
+        {
+            "name": "workingDirectory",
+            "type": "filePath",
+            "label": "Configuration directory",
+            "defaultValue": "$(System.DefaultWorkingDirectory)",
+            "helpMarkDown": "Directory containing the Terraform configuration files. The default value is $(System.DefaultWorkingDirectory)",
+            "required": false
+        },
+        {
+            "name": "commandOptions",
+            "type": "string",
+            "label": "Additional command arguments",
+            "helpMarkDown": "Any additional arguments for the selected command such as '-option=value' or '-flag'. Multiple options can also be provided delimited by spaces.<br><br>Examples:<br>-out=tfplan (for terraform plan)<br>tfplan -auto-approve (for terraform apply)",
+            "required": false
+        },
+        {
+            "name": "outputTo",
+            "type": "pickList",
+            "label": "Output to",
+            "defaultValue": "console",
+            "visibleRule": "command = show || command = custom",
+            "helpMarkDown": "choose output to file or console. ",
+            "options": {
+                "file": "file",
+                "console": "console"
+            },
+            "required": true
+        },
+        {
+            "name": "customCommand",
+            "type": "string",
+            "label": "Custom command",
+            "visibleRule": "command = custom",
+            "helpMarkDown": "The custom terraform command to execute.",
+            "required": true
+        },
+        {
+            "name": "outputFormat",
+            "type": "pickList",
+            "label": "Output format",
+            "defaultValue": "default",
+            "visibleRule": "command = show",
+            "helpMarkDown": "choose format of ouput for show cmd. ",
+            "options": {
+                "json": "json",
+                "default": "default"
+            },
+            "required": true
+        },
+        {
+            "name": "fileName",
+            "type": "string",
+            "label": "Output Filename",
+            "visibleRule": "outputTo = file",
+            "required": true,
+            "helpMarkDown": "filename of output"
+        },
+        {
+            "name": "environmentServiceNameOCI",
+            "type": "connectedService:ServiceEndpointOCI",
+            "label": "OCI connection",
+            "required": true,
+            "visibleRule": "provider = oci",
+            "helpMarkDown": "Select a OCI connection for the deployment.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup a OCI service connection using the 'Add' or 'Manage' button."
+        },
+        {
+            "name": "backendServiceOCI",
+            "type": "connectedService:ServiceEndpointOCI",
+            "label": "OCI Services connection",
+            "required": true,
+            "helpMarkDown": "OCI Services connection for the terraform backend configuration.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup an OCI Services service connection using the 'Add' or 'Manage' button.",
+            "groupName": "backendOCI"
+        },
+        {
+            "name": "backendOCIPAT",
+            "type": "string",
+            "label": "PAT",
+            "required": true,
+            "helpMarkDown": "OCI Object Storage PAT URL for TF statefile",
+            "groupName": "backendOCI",
+            "properties": {
+                "EditableOptions": "True"
+            }
+        }
+    ],
+    "dataSourceBindings": [
+        {
+            "target": "backendOCIPAT",
+            "endpointId": "$(backendServiceOCI)",
+            "dataSourceName": "OCI"
+        }
+    ],
+    "outputVariables": [
+        {
+            "name": "jsonPlanFilePath",
+            "description": "The location of the terraform plan file in JSON format that was created. This file can be used by tasks which are written for tools such as [Open Policy Agent](https://www.openpolicyagent.org/docs/latest/terraform/)<br><br>Note: This variable will only be set if 'command' input is set to 'plan'."
+        },
+        {
+            "name": "jsonOutputVariablesPath",
+            "description": "The location of the JSON file which contains the output variables set by the user in the terraform config files.<br><br>Note: This variable will only be set if 'command' input is set to 'output'."
+        },
+        {
+            "name": "changesPresent",
+            "description": "A boolean indicating if the terraform plan found any changes to apply."
+        }
+    ],
+    "messages": {
+        "TerraformToolNotFound": "Failed to find terraform tool in paths"
+    }
 }
