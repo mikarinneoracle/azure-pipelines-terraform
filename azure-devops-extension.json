@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "custom-terraform-tasks-oci",
     "name": "Terraform",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "publisher": "mikarinneoracle",
     "targets": [
         {
@@ -136,13 +136,7 @@
                     "value": "https://cloud.oracle.com/",
                     "isVisible": "false"
                 },
-                "dataSources": [
-                    {
-                        "name": "OCI",
-                        "endpointUrl": "{{endpoint.url}}",
-                        "RequestVerb":"GET",
-                        "resultSelector": ""
-                    }                
+                "dataSources": [             
                 ],
                 "authenticationSchemes": [
                     {
