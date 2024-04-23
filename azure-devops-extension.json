@@ -2,14 +2,14 @@
     "manifestVersion": 1,
     "id": "custom-terraform-tasks",
     "name": "Terraform",
-    "version": "0.1.25",
+    "version": "0.1.26",
     "publisher": "mikarinneoracle",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
-    "description": "Install terraform and run terraform commands to manage resources on Azure, AWS, GCP and OCI.",
+    "description": "Install terraform and run terraform commands to manage resources on OCI.",
     "public": true,
     "categories": [
         "Azure Pipelines"
