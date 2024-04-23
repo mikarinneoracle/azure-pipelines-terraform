@@ -132,7 +132,7 @@
             "type": "connectedService:ServiceEndpointOCI",
             "label": "OCI connection",
             "required": true,
-            "visibleRule": "provider = oci && command != init && command != validate",
+            "visibleRule": "provider = oci",
             "helpMarkDown": "Select a OCI connection for the deployment.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup a OCI service connection using the 'Add' or 'Manage' button."
         },
         {
@@ -145,7 +145,7 @@
         },
         {
             "name": "backendOCIPAT",
-            "type": "pickList",
+            "type": "string",
             "label": "PAT",
             "required": true,
             "helpMarkDown": "OCI Object Storage PAT URL for TF statefile",
