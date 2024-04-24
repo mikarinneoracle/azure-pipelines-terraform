@@ -2,6 +2,7 @@ import tasks = require('azure-pipelines-task-lib/task');
 import {ToolRunner} from 'azure-pipelines-task-lib/toolrunner';
 import {TerraformAuthorizationCommandInitializer} from './terraform-commands';
 import {BaseTerraformCommandHandler} from './base-terraform-command-handler';
+import { readFileSync } from 'fs';
 const fs = require('fs');
 
 export class TerraformCommandHandlerOCI extends BaseTerraformCommandHandler {
@@ -11,11 +12,14 @@ export class TerraformCommandHandlerOCI extends BaseTerraformCommandHandler {
     }
 
     private setupBackend(backendServiceName: string) {
-        tasks.debug("setupBackend -- does nothing ...");
+        this.backendConfig.set('region', tasks.getEndpointDataParameterRequired(backendServiceName, "region"));
+        this.backendConfig.set('user', tasks.getEndpointDataParameterRequired(backendServiceName, "user"));
+        this.backendConfig.set('tenancy', tasks.getEndpointDataParameterRequired(backendServiceName, "tenancy");
+        this.backendConfig.set('fingerprint', tasks.getEndpointDataParameterRequired(backendServiceName, "fingerprint");
+        this.backendConfig.set('key', tasks.getEndpointDataParameterRequired(backendServiceName, "key");
     }
 
     public async handleBackend(terraformToolRunner: ToolRunner) : Promise<void> {
-        tasks.debug("handleBackend -- does nothing ...");
         let backendServiceName = tasks.getInput("backendServiceOCI", true);
         this.setupBackend(backendServiceName);
 

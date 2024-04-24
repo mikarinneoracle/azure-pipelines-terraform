@@ -135,6 +135,18 @@
             "visibleRule": "provider = oci",
             "helpMarkDown": "OCI Services connection for the terraform backend configuration.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup an OCI Services service connection using the 'Add' or 'Manage' button.",
             "groupName": "backendOCI"
+        },
+        {
+            "name": "backendOCIPAT",
+            "type": "string",
+            "label": "PAT",
+            "required": true,
+            "visibleRule": "provider = oci",
+            "helpMarkDown": "OCI Object Storage PAT URL for TF statefile",
+            "groupName": "backendOCI",
+            "properties": {
+                "EditableOptions": "True"
+            }
         }
     ],
     "dataSourceBindings": [
