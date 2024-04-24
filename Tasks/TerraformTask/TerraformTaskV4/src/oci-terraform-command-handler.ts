@@ -14,9 +14,9 @@ export class TerraformCommandHandlerOCI extends BaseTerraformCommandHandler {
     private setupBackend(backendServiceName: string) {
         this.backendConfig.set('region', tasks.getEndpointDataParameterRequired(backendServiceName, "region"));
         this.backendConfig.set('user', tasks.getEndpointDataParameterRequired(backendServiceName, "user"));
-        this.backendConfig.set('tenancy', tasks.getEndpointDataParameterRequired(backendServiceName, "tenancy");
-        this.backendConfig.set('fingerprint', tasks.getEndpointDataParameterRequired(backendServiceName, "fingerprint");
-        this.backendConfig.set('key', tasks.getEndpointDataParameterRequired(backendServiceName, "key");
+        this.backendConfig.set('tenancy', tasks.getEndpointDataParameterRequired(backendServiceName, "tenancy"));
+        this.backendConfig.set('fingerprint', tasks.getEndpointDataParameterRequired(backendServiceName, "fingerprint"));
+        this.backendConfig.set('key', tasks.getEndpointDataParameterRequired(backendServiceName, "key"));
     }
 
     public async handleBackend(terraformToolRunner: ToolRunner) : Promise<void> {
