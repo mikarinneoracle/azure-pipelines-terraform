@@ -128,14 +128,6 @@
             "helpMarkDown": "filename of output"
         },
         {
-            "name": "environmentServiceNameOCI",
-            "type": "connectedService:ServiceEndpointOCI3",
-            "label": "OCI connection",
-            "required": true,
-            "visibleRule": "provider = oci",
-            "helpMarkDown": "Select a OCI connection for the deployment.<br><br>Note: If your connection is not listed or if you want to use an existing connection, you can setup a OCI service connection using the 'Add' or 'Manage' button."
-        },
-        {
             "name": "backendServiceOCI",
             "type": "connectedService:ServiceEndpointOCI3",
             "label": "OCI Services connection",

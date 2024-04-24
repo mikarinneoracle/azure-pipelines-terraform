@@ -12,12 +12,13 @@ export class TerraformCommandHandlerOCI extends BaseTerraformCommandHandler {
     }
 
     private setupBackend(backendServiceName: string) {
+        console.log(backendServiceName);
         this.backendConfig.set('pat', tasks.getInput("backendOCIPAT", true));
-        this.backendConfig.set('region', tasks.getEndpointAuthorizationParameter(backendServiceName, "region", true));
-        this.backendConfig.set('user', tasks.getEndpointAuthorizationParameter(backendServiceName, "user", true));
-        this.backendConfig.set('tenancy', tasks.getEndpointAuthorizationParameter(backendServiceName, "tenancy", true));
-        this.backendConfig.set('fingerprint', tasks.getEndpointAuthorizationParameter(backendServiceName, "fingerprint", true));
-        this.backendConfig.set('key', tasks.getEndpointAuthorizationParameter(backendServiceName, "key", true));
+        this.backendConfig.set('region', tasks.getEndpointDataParameterRequired(backendServiceName, "region"));
+        this.backendConfig.set('user', tasks.getEndpointDataParameterRequired(backendServiceName, "user"));
+        this.backendConfig.set('tenancy', tasks.getEndpointDataParameterRequired(backendServiceName, "tenancy"));
+        this.backendConfig.set('fingerprint', tasks.getEndpointDataParameterRequired(backendServiceName, "fingerprint"));
+        this.backendConfig.set('key', tasks.getEndpointDataParameterRequired(backendServiceName, "key"));
     }
 
     public async handleBackend(terraformToolRunner: ToolRunner) : Promise<void> {
@@ -30,18 +31,18 @@ export class TerraformCommandHandlerOCI extends BaseTerraformCommandHandler {
     }
 
     public async handleProvider(command: TerraformAuthorizationCommandInitializer) : Promise<void> {
-        console.log(tasks.loc("key" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "key", false)));
-        console.log(tasks.loc("user" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "user", false)));
-        console.log(tasks.loc("tenancy" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "tenancy", false)));
-        console.log(tasks.loc("fingerprint=" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "fingerprint", false)));
-        console.log(tasks.loc("region=" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "region", false)));
+        console.log("key" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "key", false));
+        console.log("user" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "user", false));
+        console.log("tenancy" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "tenancy", false));
+        console.log("fingerprint=" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "fingerprint", false));
+        console.log("region=" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "region", false));
 
         if (command.serviceProvidername) {
             fs.writeFile('./key.pem', tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "key", false),  function(err) {
                 if (err) {
                     return console.error(err);
                 }
-                console.log(tasks.loc("key.pem created"));
+                console.log("key.pem created");
             });
 
             process.env['TF_VAR_user_ocid']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "user", false);
