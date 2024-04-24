@@ -30,20 +30,18 @@ export class TerraformCommandHandlerOCI extends BaseTerraformCommandHandler {
     }
 
     public async handleProvider(command: TerraformAuthorizationCommandInitializer) : Promise<void> {
-        if (command.serviceProvidername) {
-            /*
-            OCI_CLI_USER
-            OCI_CLI_TENANCY
-            OCI_CLI_FINGERPRINT
-            OCI_CLI_KEY_CONTENT
-            OCI_CLI_REGION
-            */
+        console.log(tasks.loc("key" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "key", false)));
+        console.log(tasks.loc("user" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "user", false)));
+        console.log(tasks.loc("tenancy" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "tenancy", false)));
+        console.log(tasks.loc("fingerprint=" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "fingerprint", false)));
+        console.log(tasks.loc("region=" + tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "region", false)));
 
+        if (command.serviceProvidername) {
             fs.writeFile('./key.pem', tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "key", false),  function(err) {
                 if (err) {
                     return console.error(err);
                 }
-                console.log("key.pem created");
+                console.log(tasks.loc("key.pem created"));
             });
 
             process.env['TF_VAR_user_ocid']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "user", false);
