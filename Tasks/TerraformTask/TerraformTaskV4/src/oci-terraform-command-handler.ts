@@ -2,6 +2,8 @@ import tasks = require('azure-pipelines-task-lib/task');
 import {ToolRunner} from 'azure-pipelines-task-lib/toolrunner';
 import {TerraformAuthorizationCommandInitializer} from './terraform-commands';
 import {BaseTerraformCommandHandler} from './base-terraform-command-handler';
+import { readFileSync } from 'fs';
+const fs = require('fs');
 
 export class TerraformCommandHandlerOCI extends BaseTerraformCommandHandler {
     constructor() {
@@ -36,11 +38,19 @@ export class TerraformCommandHandlerOCI extends BaseTerraformCommandHandler {
             OCI_CLI_KEY_CONTENT
             OCI_CLI_REGION
             */
-            process.env['OCI_CLI_USER']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "user", false);
-            process.env['OCI_CLI_TENANCY']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "tenancy", false);        
-            process.env['OCI_CLI_FINGERPRINT']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "fingerprint", false);
-            process.env['OCI_CLI_KEY_CONTENT']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "key", false);        
-            process.env['OCI_CLI_REGION']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "region", false);  
+
+            fs.writeFile('./key.pem', tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "key", false),  function(err) {
+                if (err) {
+                    return console.error(err);
+                }
+                console.log("key.pem created");
+            });
+
+            process.env['TF_VAR_user_ocid']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "user", false);
+            process.env['TF_VAR_tenancy_ocid']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "tenancy", false);        
+            process.env['TF_VAR_fingerprint']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "fingerprint", false);
+            process.env['TF_VAR_private_key_path']  =  "./key.pem";      
+            process.env['TF_VAR_region']  = tasks.getEndpointAuthorizationParameter(command.serviceProvidername, "region", false);  
         }
     }
 }
